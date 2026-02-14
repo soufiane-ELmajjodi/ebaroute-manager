@@ -1,0 +1,9 @@
+{
+  "devices": [],
+  "history": [],
+  "settings": {
+    "alertDaysBefore": 3,
+    "rechargeAmount": 5,
+    "currency": "MAD"
+  }
+}
