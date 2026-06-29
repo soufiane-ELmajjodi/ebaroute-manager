@@ -1,3 +1,8 @@
 .env
 server-manager/.env
 server-manager/credentials.json
+
+node_modules/
+dist/
+.DS_Store
+*.log
