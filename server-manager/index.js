@@ -41,7 +41,9 @@ const authenticateToken = (req, res, next) => {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DB_PATH = path.join(__dirname, 'db.json');
+const DB_PATH = process.env.VERCEL
+    ? path.join('/tmp', 'db.json')
+    : path.join(__dirname, 'db.json');
 
 // Load or initialize DB (for fallback)
 async function loadLocalDB() {
@@ -128,6 +130,11 @@ app.get('/api/setup', async (req, res) => {
     res.json({ message: 'Setup not required for direct integration' });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+// Only listen when not in Vercel serverless environment
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}`);
+    });
+}
+
+export default app;
