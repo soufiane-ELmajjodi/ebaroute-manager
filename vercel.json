@@ -1,6 +1,1 @@
-{
-  "rootDirectory": "manager-abonment",
-  "buildCommand": "npm install --include=dev && npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite"
-}
+{}
