@@ -2,3 +2,5 @@ credentials.json
 .env
 *.pem
 db.json
+node_modules/
+
