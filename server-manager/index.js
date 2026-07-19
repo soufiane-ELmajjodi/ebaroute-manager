@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid'; // I don't need uuid for now, but let's see
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 3007;
 
 app.use(cors());
 app.use(express.json());
@@ -75,18 +75,18 @@ app.post('/api/login', (req, res) => {
 
 // Proxy GET data
 app.get('/api/data', authenticateToken, async (req, res) => {
-
     try {
         console.log('Fetching from Google Sheets...');
         const db = await sheets.getDatabase();
         console.log('Fetch success');
         res.json(db);
     } catch (err) {
-        console.error('Fetch error:', err.message);
-        // Fallback to local DB?
-        console.log('Using local DB fallback due to error');
-        const db = await loadLocalDB();
-        res.json(db);
+        console.error('Fetch error:', err.message, err.response?.data || err);
+        res.status(500).json({
+            error: 'Failed to fetch data from Google Sheets',
+            details: err.message,
+            help: 'Vérifiez les permissions du compte de service, l’ID du spreadsheet et le nom de la feuille.'
+        });
     }
 });
 

@@ -6,7 +6,7 @@ This is the Node.js/Express backend for the GPS Management System.
 
 1. Open a terminal in this directory (`server-manager`).
 2. Run `npm install` to install dependencies.
-3. Run `npm start` to start the server at `http://localhost:3001`.
+3. Run `npm start` to start the server at `http://localhost:3006`.
 
 ## Features
 - Persistence via `db.json`.

@@ -37,7 +37,7 @@ async function getSheetValues(range) {
         });
         return response.data.values || [];
     } catch (error) {
-        console.error('Error getting sheet values:', error.message);
+        console.error('Error getting sheet values:', error.message, error.response?.data || 'no response data');
         throw error;
     }
 }
@@ -70,10 +70,12 @@ function mapRowToObject(headers, row) {
 // Get full database (mimicking the JSON structure)
 export async function getDatabase() {
     try {
-        console.log(process.env.GOOGLE_SHEET_NAME, 'GOOGLE_SHEET_NAME');
+        if (!SPREADSHEET_ID) {
+            throw new Error('GOOGLE_SHEET_ID is not set');
+        }
         const CLIENTS_SHEET = process.env.GOOGLE_SHEET_NAME || 'clientss';
+        console.log(`Loading Google Sheets data from spreadsheet=${SPREADSHEET_ID} sheet=${CLIENTS_SHEET}`);
         const clientsData = await getSheetValues(`${CLIENTS_SHEET}!A:Z`);
-        console.log(clientsData, 'clientsData');
         const historyData = await getSheetValues('history!A:Z');
         const settingsData = await getSheetValues('settings!A:Z');
 
