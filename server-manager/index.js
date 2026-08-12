@@ -7,7 +7,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import * as sheets from './sheets.js';
 import jwt from 'jsonwebtoken';
-import { v4 as uuidv4 } from 'uuid'; // I don't need uuid for now, but let's see if it's there. Actually I'll just use simple logic.
 
 
 dotenv.config();

@@ -1,1 +1,13 @@
-{}
+{
+  "buildCommand": "cd manager-abonment && npm install && npm run build",
+  "outputDirectory": "manager-abonment/dist",
+  "functions": {
+    "api/index.js": {
+      "runtime": "@vercel/node@3"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
